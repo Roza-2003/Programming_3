@@ -1,8 +1,6 @@
-class ancrev {
-	constructor(x, y, ind) {
-		this.index = ind;
-		this.x = x;
-		this.y = y;
+class ancrev extends LivingCreature {
+	constructor(x, y, index) {
+		super(x, y, index);
 		this.energy = 5;
 		this.multiply = 0;
 		this.directions;
@@ -28,7 +26,6 @@ class ancrev {
 			var b = this.directions[i][1];
 			if (a >= 0 && a < matrix[0].length && b >= 0 && b < matrix.length) {
 				if (matrix[b][a] == t) {
-
 					found.push(this.directions[i]);
 				}
 			}
@@ -64,5 +61,5 @@ class ancrev {
 			}
 
 		}
-	}	
+	}
 }

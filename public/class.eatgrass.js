@@ -1,11 +1,10 @@
 class StandardCritter extends LivingCreature {
 	constructor(x, y, index) {
-		super(x,y,index);
+		super(x, y, index);
 		this.energy = 8;
 		this.power = 0;
 		this.direction;
 	}
-	
 
 	move() {
 		var x = this.chooseCell(0);
@@ -45,9 +44,9 @@ class StandardCritter extends LivingCreature {
 			}
 		}
 		if (this.energy >= 25) {
-				this.mul();
-				this.energy = 20;
-			}
+			this.mul();
+			this.energy = 20;
+		}
 		else {
 			this.move();
 		}
@@ -65,18 +64,18 @@ class StandardCritter extends LivingCreature {
 		this.energy++;
 		var datarkVandakner = this.chooseCell(0);
 		var norVandak = random(datarkVandakner);
-	  
+
 		if (norVandak && this.energy >= 8) {
 			var norX = norVandak[0];
 			var norY = norVandak[1];
 			matrix[norY][norX] = 2;
-	
+
 			var norXotaker = new StandardCritter(norX, norY, this.index);
 			xotArr.push(norXotaker);
 			this.energy = 6;
-			
+
 		}
 	}
-	
+
 }
 

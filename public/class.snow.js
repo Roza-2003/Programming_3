@@ -1,8 +1,6 @@
-class snow {
-	constructor(x, y, ind) {
-		this.index = ind;
-		this.x = x;
-		this.y = y;
+class snow extends LivingCreature {
+	constructor(x, y, index) {
+		super(x, y, index);
 		this.energy = 5;
 		this.multiply = 0;
 		this.directions;
@@ -22,13 +20,11 @@ class snow {
 	getNewDirections(t) {
 		this.newDirections();
 		var found = [];
-
 		for (var i in this.directions) {
 			var a = this.directions[i][0];
 			var b = this.directions[i][1];
 			if (a >= 0 && a < matrix[0].length && b >= 0 && b < matrix.length) {
 				if (matrix[b][a] == t) {
-
 					found.push(this.directions[i]);
 				}
 			}
@@ -65,17 +61,15 @@ class snow {
 
 		}
 	}
-
-
 	die() {
 		if (weather = "summer") {
-		matrix[this.y][this.x] = 0;
-		for (var i in snowArr) {
-			if (this.x == snowArr[i].x && this.y == snowArr[i].y) {
-				snowArr.splice(i, 1);
-				break;
+			matrix[this.y][this.x] = 0;
+			for (var i in snowArr) {
+				if (this.x == snowArr[i].x && this.y == snowArr[i].y) {
+					snowArr.splice(i, 1);
+					break;
+				}
 			}
 		}
-	}
 	}
 }	

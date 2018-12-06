@@ -76,7 +76,7 @@ function setup() {
   for (var a = 0; a < y; a++) {
     matrix[a] = [];
     for (var b = 0; b < x; b++) {
-      var rand = Math.round(random(0,5));
+      var rand = Math.round(random(0, 5));
       matrix[a][b] = rand;
     }
   }
@@ -130,7 +130,7 @@ function draw() {
     console.log(snowArr);
 
   }
-  
+
 
   if (weather == "winter") {
     background("#acacac");
