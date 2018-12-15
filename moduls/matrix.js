@@ -136,3 +136,31 @@ else if (takter % 200 == 100) {
     console.log(snowArr);
 
 }
+io.on('connection', function (socket) {
+    setInterval(func, 500);
+
+    function func() {
+
+        for (var i in xotArr) {
+            xotArr[i].mul();
+        }
+        for (var j in xotakerArr) {
+            xotakerArr[j].eat();
+        }
+        for (var j in gishatichArr) {
+            gishatichArr[j].eat();
+        }
+
+        if (weather == "summer") {
+            for (var i in gishatichArr) {
+                gishatichArr[i].eat();
+            }
+        }
+        if (weather == "winter") {
+            for (var i in snowArr) {
+                snowArr[i].eat();
+            }
+        }
+        io.sockets.emit('matrix', [matrix, weather]);
+    }
+});
