@@ -1,15 +1,3 @@
-var matrix = [];
-var x = 40;
-var y = 40;
-var side = 20;
-var xotArr = [];
-var xotakerArr = [];
-var gishatichArr = [];
-var snowArr = [];
-var ancrevArr = [];
-var takter = -1;
-var weather = "summer";
-
 function andzrevStexcel() {
   var dzg = 10;
   while (dzg > 0) {
@@ -72,79 +60,25 @@ function gishishatich() {
     }
   }
 }
+
+var side = 20;
+
 function setup() {
-  for (var a = 0; a < y; a++) {
-    matrix[a] = [];
-    for (var b = 0; b < x; b++) {
-      var rand = Math.round(random(0, 5));
-      matrix[a][b] = rand;
-    }
-  }
   frameRate(3);
   createCanvas(x * side, y * side);
   background('#FAFDAD');
-
-  for (var i = 0; i < matrix.length; i++) {
-    for (var j = 0; j < matrix[i].length; j++) {
-      if (matrix[i][j] == 1) {
-        xotArr.push(new Grass(j, i, 1));
-      }
-      else if (matrix[i][j] == 2) {
-        xotakerArr.push(new StandardCritter(j, i, 2));
-      }
-      else if (matrix[i][j] == 3) {
-        gishatichArr.push(new Gishatich(j, i, 3));
-      }
-
-    }
-  }
-}
-
-
-var dzyunKa = false;
-function draw() {
-  takter++;
-  console.log(takter);
-  if (takter % 200 == 0) {
-    weather = "summer";
-    andzrevStexcel();
-
-    for (var y = 0; y < matrix.length; y++) {
-      for (var x = 0; x < matrix[y].length; x++) {
-        if (matrix[y][x] == 4)
-          matrix[y][x] = 0;
-      }
-    }
-    console.log(ancrevArr);
-  }
-  else if (takter % 200 == 100) {
-    weather = "winter";
-    dzyunStexcel();
-
-    for (var y = 0; y < matrix.length; y++) {
-      for (var x = 0; x < matrix[y].length; x++) {
-        if (matrix[y][x] == 5)
-          matrix[y][x] = 0;
-      }
-    }
-    console.log(snowArr);
-
-  }
-
+  socket = io();
+  socket.on("send matrix", function (mtx) {
+    matrix = mtx;
+    createCanvas(matrix[0].length * side + 1, matrix.length * side + 1);
+    console.log(matrix);
+  });
 
   if (weather == "winter") {
     background("#acacac");
-
   }
   else if (weather == "summer") {
     background("#FAFDAD");
-
-  }
-  for (var i in xotArr) {
-    xotArr[i].mul();
-  }
-  for (var i in xotakerArr) {
-    xotakerArr[i].eat();
   }
   for (var i = 0; i < matrix.length; i++) {
     for (var j = 0; j < matrix[i].length; j++) {
@@ -175,20 +109,45 @@ function draw() {
       }
     }
   }
-  for (var i in xotArr) {
-    xotArr[i].mul();
-  }
-  for (var i in xotakerArr) {
-    xotakerArr[i].eat();
-  }
-  if (weather == "summer") {
-    for (var i in gishatichArr) {
-      gishatichArr[i].eat();
-    }
-  }
+}
+
+
+var dzyunKa = false;
+
+function draw() {
   if (weather == "winter") {
-    for (var i in snowArr) {
-      snowArr[i].eat();
+    background("#acacac");
+  }
+  else if (weather == "summer") {
+    background("#FAFDAD");
+  }
+  for (var i = 0; i < matrix.length; i++) {
+    for (var j = 0; j < matrix[i].length; j++) {
+      if (matrix[i][j] == 1) {
+        fill("green");
+        rect(j * side, i * side, side, side);
+      }
+      else if (matrix[i][j] == 2) {
+        fill("yellow");
+        rect(j * side, i * side, side, side);
+      }
+      else if (matrix[i][j] == 3) {
+        fill("red");
+        rect(j * side, i * side, side, side);
+      }
+      else if (weather == "winter") {
+        if (matrix[i][j] == 4) {
+          fill("write");
+          ellipse(j * side + 10, i * side + 10, side, side);
+        }
+      }
+      else if (weather == "summer") {
+        if (matrix[i][j] == 5) {
+          fill("#84BDF6");
+          ellipse(j * side + 10, i * side + 10, side, side);
+
+        }
+      }
     }
   }
 }
