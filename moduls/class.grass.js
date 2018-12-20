@@ -1,4 +1,4 @@
-var LivingCreature = require("./LivingCreature.js");
+var LivingCreature = require("./class.LivingCreature");
 module.exports = class Grass extends LivingCreature {
     mul() {
         this.multiply++;
@@ -8,10 +8,9 @@ module.exports = class Grass extends LivingCreature {
         if (norVandak && this.multiply >= 8) {
             var norX = norVandak[0];
             var norY = norVandak[1];
-            matrix[norY][norX] = 1;
 
-            var norXot = new Grass(norX, norY, this.index);
-            xotArr.push(norXot);
+            matrix[norY][norX] = new Grass(norX, norY, this.index);
+
             this.multiply = 0;
 
         }

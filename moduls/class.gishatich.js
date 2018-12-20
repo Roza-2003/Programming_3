@@ -1,4 +1,4 @@
-var LivingCreature = require("./LivingCreature.js");
+var LivingCreature = require("./class.LivingCreature");
 module.exports = class Gishatich extends LivingCreature {
 	constructor(x, y, index) {
 		super(x, y, index);
@@ -66,11 +66,8 @@ module.exports = class Gishatich extends LivingCreature {
 		if (norVandak) {
 			var norX = norVandak[0];
 			var norY = norVandak[1];
-			matrix[norY][norX] = 3;
-			var norXot = new Gishatich(norX, norY, this.index);
-			gishatichArr.push(norXot);
+			matrix[norY][norX] =  new Gishatich(norX, norY, this.index);
 			this.energy = 5;
 		}
-
 	}
 }

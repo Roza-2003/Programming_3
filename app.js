@@ -4,7 +4,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-app.use(express.static("."));
+app.use(express.static("./public"));
 
 app.get('/', function (req, res) {
   res.redirect('index.html');
@@ -12,14 +12,20 @@ app.get('/', function (req, res) {
 
 server.listen(3000);
 
+var matrix = require("./moduls/matrix");
+console.log(matrix)
+
 io.on('connection', function (socket) {
-
-
- 
-
+  socket.emit("first matrix",matrix);
+  
+  soxket.on("set false", function(arr){
+    matrix[arr[0]] [arr[1]].acted = false;
+  })
 });
-
-//setInterval(draw, 500);
+/*
+setInterval(draw, 500);
+var weather = "summer";
+var takter = -1;
 
 function draw() {
   takter++;
@@ -67,66 +73,67 @@ function draw() {
   }
 }
 
-function andzrevStexcel() {
-  var dzg = 10;
-  while (dzg > 0) {
-    var x1 = Math.floor(Math.random() * (x - 1));
-    var y1 = Math.floor(Math.random() * (y - 1));
-    if (matrix[y1][x1] == 0) {
-      matrix[y1][x1] = 5;
-      ancrevArr.push(new ancrev(x1, y1, 5));
-      dzg--;
+// function andzrevStexcel() {
+//   var dzg = 10;
+//   while (dzg > 0) {
+//     var x1 = Math.floor(Math.random() * (x - 1));
+//     var y1 = Math.floor(Math.random() * (y - 1));
+//     if (matrix[y1][x1] == 0) {
+//       matrix[y1][x1] = 5;
+//       ancrevArr.push(new ancrev(x1, y1, 5));
+//       dzg--;
 
-    }
-  }
-}
-function dzyunStexcel() {
-  var dzg = 10;
-  while (dzg > 0) {
-    var x1 = Math.floor(Math.random() * (x - 1));
-    var y1 = Math.floor(Math.random() * (y - 1));
-    if (matrix[y1][x1] == 0) {
-      matrix[y1][x1] = 4;
-      snowArr.push(new snow(x1, y1, 4));
-      dzg--;
-    }
-  }
-}
-function xot() {
-  var dzg = 20;
-  while (dzg > 0) {
-    var x1 = Math.floor(Math.random() * (x - 1));
-    var y1 = Math.floor(Math.random() * (y - 1));
-    if (matrix[y1][x1] == 0) {
-      matrix[y1][x1] = 1;
-      xotArr.push(new Grass(x1, y1, 1));
-      dzg--;
-    }
-  }
-}
-function xotaker() {
-  var dzg = 10;
-  while (dzg > 0) {
-    var x1 = Math.floor(Math.random() * (x - 1));
-    var y1 = Math.floor(Math.random() * (y - 1));
-    if (matrix[y1][x1] == 0) {
-      matrix[y1][x1] = 2;
-      xotakerArr.push(new StandardCritter(x1, y1, 2));
-      dzg--;
-    }
-  }
-}
-function gishishatich() {
-  var dzg = 5;
-  while (dzg > 0) {
-    var x1 = Math.floor(Math.random() * (x - 1));
-    var y1 = Math.floor(Math.random() * (y - 1));
-    if (matrix[y1][x1] == 0) {
-      matrix[y1][x1] = 4;
-      gishatichArr.push(new Gishatich(x1, y1, 3));
-      dzg--;
-    }
-  }
-}
+//     }
+//   }
+// }
+// function dzyunStexcel() {
+//   var dzg = 10;
+//   while (dzg > 0) {
+//     var x1 = Math.floor(Math.random() * (x - 1));
+//     var y1 = Math.floor(Math.random() * (y - 1));
+//     if (matrix[y1][x1] == 0) {
+//       matrix[y1][x1] = 4;
+//       snowArr.push(new snow(x1, y1, 4));
+//       dzg--;
+//     }
+//   }
+// }
+// function xot() {
+//   var dzg = 20;
+//   while (dzg > 0) {
+//     var x1 = Math.floor(Math.random() * (x - 1));
+//     var y1 = Math.floor(Math.random() * (y - 1));
+//     if (matrix[y1][x1] == 0) {
+//       matrix[y1][x1] = 1;
+//       xotArr.push(new Grass(x1, y1, 1));
+//       dzg--;
+//     }
+//   }
+// }
+// function xotaker() {
+//   var dzg = 10;
+//   while (dzg > 0) {
+//     var x1 = Math.floor(Math.random() * (x - 1));
+//     var y1 = Math.floor(Math.random() * (y - 1));
+//     if (matrix[y1][x1] == 0) {
+//       matrix[y1][x1] = 2;
+//       xotakerArr.push(new StandardCritter(x1, y1, 2));
+//       dzg--;
+//     }
+//   }
+// }
+// function gishishatich() {
+//   var dzg = 5;
+//   while (dzg > 0) {
+//     var x1 = Math.floor(Math.random() * (x - 1));
+//     var y1 = Math.floor(Math.random() * (y - 1));
+//     if (matrix[y1][x1] == 0) {
+//       matrix[y1][x1] = 4;
+//       gishatichArr.push(new Gishatich(x1, y1, 3));
+//       dzg--;
+//     }
+//   }
+// }
 
 
+*/

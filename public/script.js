@@ -1,73 +1,11 @@
-function andzrevStexcel() {
-  var dzg = 10;
-  while (dzg > 0) {
-    var x1 = Math.floor(random(x - 1));
-    var y1 = Math.floor(random(y - 1));
-    if (matrix[y1][x1] == 0) {
-      matrix[y1][x1] = 5;
-
-      ancrevArr.push(new ancrev(x1, y1, 5));
-      dzg--;
-
-    }
-  }
-}
-function dzyunStexcel() {
-  var dzg = 10;
-  while (dzg > 0) {
-    var x1 = Math.floor(random(x - 1));
-    var y1 = Math.floor(random(y - 1));
-    if (matrix[y1][x1] == 0) {
-      matrix[y1][x1] = 4;
-      snowArr.push(new snow(x1, y1, 4));
-      dzg--;
-    }
-  }
-}
-function xot() {
-  var dzg = 20;
-  while (dzg > 0) {
-    var x1 = Math.floor(random(x - 1));
-    var y1 = Math.floor(random(y - 1));
-    if (matrix[y1][x1] == 0) {
-      matrix[y1][x1] = 1;
-      xotArr.push(new Grass(x1, y1, 1));
-      dzg--;
-    }
-  }
-}
-function xotaker() {
-  var dzg = 10;
-  while (dzg > 0) {
-    var x1 = Math.floor(random(x - 1));
-    var y1 = Math.floor(random(y - 1));
-    if (matrix[y1][x1] == 0) {
-      matrix[y1][x1] = 2;
-      xotakerArr.push(new StandardCritter(x1, y1, 2));
-      dzg--;
-    }
-  }
-}
-function gishishatich() {
-  var dzg = 5;
-  while (dzg > 0) {
-    var x1 = Math.floor(random(x - 1));
-    var y1 = Math.floor(random(y - 1));
-    if (matrix[y1][x1] == 0) {
-      matrix[y1][x1] = 4;
-      gishatichArr.push(new Gishatich(x1, y1, 4));
-      dzg--;
-    }
-  }
-}
-
 var side = 20;
 
 function setup() {
   frameRate(3);
   createCanvas(x * side, y * side);
   background('#FAFDAD');
-  socket = io();
+
+  /*socket = io();
   socket.on("send matrix", function (mtx) {
     matrix = mtx;
     createCanvas(matrix[0].length * side + 1, matrix.length * side + 1);
@@ -79,8 +17,9 @@ function setup() {
   }
   else if (weather == "summer") {
     background("#FAFDAD");
-  }
-  for (var i = 0; i < matrix.length; i++) {
+  }*/
+
+  /*for (var i = 0; i < matrix.length; i++) {
     for (var j = 0; j < matrix[i].length; j++) {
       if (matrix[i][j] == 1) {
         fill("green");
@@ -108,7 +47,8 @@ function setup() {
         }
       }
     }
-  }
+  }*/
+  // noLoop();
 }
 
 
@@ -150,4 +90,8 @@ function draw() {
       }
     }
   }
+  // textSize(30);
+  // fill("black");
+  // text("Game of life");
+  // line(70,80,130,180);
 }

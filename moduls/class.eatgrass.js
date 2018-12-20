@@ -1,4 +1,4 @@
-var LivingCreature = require("./LivingCreature.js");
+var LivingCreature = require("./class.LivingCreature");
 module.exports = class StandardCritter extends LivingCreature {
 	constructor(x, y, index) {
 		super(x, y, index);
@@ -69,12 +69,8 @@ module.exports = class StandardCritter extends LivingCreature {
 		if (norVandak && this.energy >= 8) {
 			var norX = norVandak[0];
 			var norY = norVandak[1];
-			matrix[norY][norX] = 2;
-
-			var norXotaker = new StandardCritter(norX, norY, this.index);
-			xotArr.push(norXotaker);
+			matrix[norY][norX] = new StandardCritter(norX, norY, this.index);
 			this.energy = 6;
-
 		}
 	}
 
