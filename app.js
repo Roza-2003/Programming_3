@@ -13,20 +13,17 @@ app.get('/', function (req, res) {
 server.listen(3000);
 
 var matrix = require("./moduls/matrix");
-console.log(matrix)
+console.log(matrix);
 
+var weather = "summer";
+console.log(weather);
 io.on('connection', function (socket) {
   socket.emit("first matrix",matrix);
-  
-  soxket.on("set false", function(arr){
-    matrix[arr[0]] [arr[1]].acted = false;
-  })
+  socket.emit("exanak",weather);
 });
-/*
-setInterval(draw, 500);
-var weather = "summer";
-var takter = -1;
 
+/*var takter = -1;
+setInterval(draw, 500);
 function draw() {
   takter++;
   console.log(takter);
