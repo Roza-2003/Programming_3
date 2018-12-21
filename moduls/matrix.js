@@ -31,11 +31,52 @@ for (var i = 0; i < matrix.length; i++) {
         else if (matrix[i][j] == 4) {
             matrix[i][j] = new Snow(j, i, 4);
         } 
-        else if (matrix[i][j] == 3) {
+        else if (matrix[i][j] == 5) {
             matrix[i][j] = new Ancrev(j, i, 5);
         }
     }
 }
+
+/*f
+// function xot() {
+//   var dzg = 20;
+//   while (dzg > 0) {
+//     var x1 = Math.floor(Math.random() * (x - 1));
+//     var y1 = Math.floor(Math.random() * (y - 1));
+//     if (matrix[y1][x1] == 0) {
+//       matrix[y1][x1] = 1;
+//       xotArr.push(new Grass(x1, y1, 1));
+//       dzg--;
+//     }
+//   }
+// }
+// function xotaker() {
+//   var dzg = 10;
+//   while (dzg > 0) {
+//     var x1 = Math.floor(Math.random() * (x - 1));
+//     var y1 = Math.floor(Math.random() * (y - 1));
+//     if (matrix[y1][x1] == 0) {
+//       matrix[y1][x1] = 2;
+//       xotakerArr.push(new StandardCritter(x1, y1, 2));
+//       dzg--;
+//     }
+//   }
+// }
+// function gishishatich() {
+//   var dzg = 5;
+//   while (dzg > 0) {
+//     var x1 = Math.floor(Math.random() * (x - 1));
+//     var y1 = Math.floor(Math.random() * (y - 1));
+//     if (matrix[y1][x1] == 0) {
+//       matrix[y1][x1] = 4;
+//       gishatichArr.push(new Gishatich(x1, y1, 3));
+//       dzg--;
+//     }
+//   }
+// }
+
+
+*/
 
 //??export 
 

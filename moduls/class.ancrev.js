@@ -4,7 +4,6 @@ module.exports =  class ancrev extends LivingCreature {
 		super(x, y, index);
 		this.energy = 5;
 		this.multiply = 0;
-		this.directions;
 	}
 	newDirections() {
 		this.directions = [
@@ -33,19 +32,18 @@ module.exports =  class ancrev extends LivingCreature {
 		}
 		return found;
 	}
-	eat() {
-		var x = this.getNewDirections(2);
-		var new_x = random(x);
+	eat(matrix) {
+		var new_x = randomInRange(this.chooseCell(1,matrix));
 		if (new_x) {
 			var x = new_x[0];
 			var y = new_x[1];
 
-			matrix[y][x] = 3;
+			matrix[y][x] = 	matrix[this.y][this.x];
 			matrix[this.y][this.x] = 0;
 
 			this.x = x;
 			this.y = y;
-			for (var i in xotArr) {
+			/*for (var i in xotArr) {
 				if (xotArr[i].x == x && xotArr[i].y == y) {
 					xotArr.splice(i, 1);
 				}
@@ -59,8 +57,23 @@ module.exports =  class ancrev extends LivingCreature {
 				if (gishatichArr[i].x == x && gishatichArr[i].y == y) {
 					gishatichArr.splice(i, 1);
 				}
-			}
+			}*/
 
 		}
 	}
+	die(matrix) {
+		if (weather = "summer") {
+			matrix[this.y][this.x] = 0;
+			/*for (var i in snowArr) {
+				if (this.x == snowArr[i].x && this.y == snowArr[i].y) {
+					snowArr.splice(i, 1);
+					break;
+				}
+			}*/
+		}
+	}
+}
+function randomInRange(arr){
+    return arr[Math.floor(Math.random() * arr.length)];
+
 }
