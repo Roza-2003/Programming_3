@@ -19,7 +19,7 @@ module.exports = class LivingCreature {
     }
 
     chooseCell(character,matrix) {
-            //this.chooseNewCoordinates();
+            this.chooseNewCoordinates();
             var found = [];
             for (var i in this.directions) {
                 var x = this.directions[i][0];

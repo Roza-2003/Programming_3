@@ -28,9 +28,12 @@ function setup() {
 }
 
 
-//var dzyunKa = false;
+var dzyunKa = false;
 
 function draw() {
+  socket.on("exanak", function (wth) {
+    weather = wth;
+  });
   console.log(weather);
 
   if (weather == "winter") {

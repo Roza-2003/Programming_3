@@ -2,6 +2,7 @@ var LivingCreature = require("./class.LivingCreature");
 module.exports =  class ancrev extends LivingCreature {
 	constructor(x, y, index) {
 		super(x, y, index);
+		this.index = index;
 		this.energy = 5;
 		this.multiply = 0;
 	}
@@ -43,7 +44,7 @@ module.exports =  class ancrev extends LivingCreature {
 
 			this.x = x;
 			this.y = y;
-			/*for (var i in xotArr) {
+			for (var i in xotArr) {
 				if (xotArr[i].x == x && xotArr[i].y == y) {
 					xotArr.splice(i, 1);
 				}
@@ -57,19 +58,18 @@ module.exports =  class ancrev extends LivingCreature {
 				if (gishatichArr[i].x == x && gishatichArr[i].y == y) {
 					gishatichArr.splice(i, 1);
 				}
-			}*/
-
+			}
 		}
 	}
 	die(matrix) {
 		if (weather = "summer") {
 			matrix[this.y][this.x] = 0;
-			/*for (var i in snowArr) {
+			for (var i in snowArr) {
 				if (this.x == snowArr[i].x && this.y == snowArr[i].y) {
 					snowArr.splice(i, 1);
 					break;
 				}
-			}*/
+			}
 		}
 	}
 }

@@ -1,7 +1,5 @@
 var LivingCreature = require("./class.LivingCreature");
-
 module.exports = class Grass extends LivingCreature {
-    
     mul(matrix) {
         this.multiply++;
         var datarkVandakner = this.chooseCell(0,matrix);

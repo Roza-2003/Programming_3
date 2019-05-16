@@ -43,7 +43,7 @@ module.exports =  class snow extends LivingCreature {
 
 			this.x = x;
 			this.y = y;
-			/*for (var i in xotArr) {
+			for (var i in xotArr) {
 				if (xotArr[i].x == x && xotArr[i].y == y) {
 					xotArr.splice(i, 1);
 				}
@@ -57,7 +57,7 @@ module.exports =  class snow extends LivingCreature {
 				if (gishatichArr[i].x == x && gishatichArr[i].y == y) {
 					gishatichArr.splice(i, 1);
 				}
-			}*/
+			}
 
 		}
 	}

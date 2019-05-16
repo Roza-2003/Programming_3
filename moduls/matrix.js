@@ -37,50 +37,49 @@ for (var i = 0; i < matrix.length; i++) {
     }
 }
 
-/*f
-// function xot() {
-//   var dzg = 20;
-//   while (dzg > 0) {
-//     var x1 = Math.floor(Math.random() * (x - 1));
-//     var y1 = Math.floor(Math.random() * (y - 1));
-//     if (matrix[y1][x1] == 0) {
-//       matrix[y1][x1] = 1;
-//       xotArr.push(new Grass(x1, y1, 1));
-//       dzg--;
-//     }
-//   }
-// }
-// function xotaker() {
-//   var dzg = 10;
-//   while (dzg > 0) {
-//     var x1 = Math.floor(Math.random() * (x - 1));
-//     var y1 = Math.floor(Math.random() * (y - 1));
-//     if (matrix[y1][x1] == 0) {
-//       matrix[y1][x1] = 2;
-//       xotakerArr.push(new StandardCritter(x1, y1, 2));
-//       dzg--;
-//     }
-//   }
-// }
-// function gishishatich() {
-//   var dzg = 5;
-//   while (dzg > 0) {
-//     var x1 = Math.floor(Math.random() * (x - 1));
-//     var y1 = Math.floor(Math.random() * (y - 1));
-//     if (matrix[y1][x1] == 0) {
-//       matrix[y1][x1] = 4;
-//       gishatichArr.push(new Gishatich(x1, y1, 3));
-//       dzg--;
-//     }
-//   }
-// }
+
+function xot() {
+  var dzg = 20;
+  while (dzg > 0) {
+    var x1 = Math.floor(Math.random() * (x - 1));
+    var y1 = Math.floor(Math.random() * (y - 1));
+    if (matrix[y1][x1] == 0) {
+      matrix[y1][x1] = 1;
+      xotArr.push(new Grass(x1, y1, 1));
+      dzg--;
+    }
+  }
+}
+function xotaker() {
+  var dzg = 10;
+  while (dzg > 0) {
+    var x1 = Math.floor(Math.random() * (x - 1));
+    var y1 = Math.floor(Math.random() * (y - 1));
+    if (matrix[y1][x1] == 0) {
+      matrix[y1][x1] = 2;
+      xotakerArr.push(new StandardCritter(x1, y1, 2));
+      dzg--;
+    }
+  }
+}
+function gishishatich() {
+  var dzg = 5;
+  while (dzg > 0) {
+    var x1 = Math.floor(Math.random() * (x - 1));
+    var y1 = Math.floor(Math.random() * (y - 1));
+    if (matrix[y1][x1] == 0) {
+      matrix[y1][x1] = 4;
+      gishatichArr.push(new Gishatich(x1, y1, 3));
+      dzg--;
+    }
+  }
+}
 
 
-*/
 
 //??export 
 
-// function randomItemPromArray(num){
-//     return Math.floor(Math.random() * num);
-// }
+function randomItemPromArray(num){
+    return Math.floor(Math.random() * num);
+}
  module.exports = matrix;

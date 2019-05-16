@@ -12,78 +12,34 @@ app.get('/', function (req, res) {
 
 server.listen(3000);
 
-var ancrev = require('./moduls/class.ancrev');
-var snow = require('./moduls/class.snow');
+xotArr = [];
+xotakerArr = [];
+gishatichArr = [];
+snowArr = [];
+ancrevArr = [];
 
-var matrix = require("./moduls/matrix");
+// xotClec = 0;
+// xotakerCnvec = 0;
+// gishatichCnvec = 0;
+// ancrevEkav = 0;
+// cyunEkav = 0;
+var ancrev = require('./moduls/class.ancrev.js');
+var snow = require('./moduls/class.snow.js');
+
+var matrix = require("./moduls/matrix.js");
 
 var weather = "summer";
 
 var takter = -1;
 
-io.on('connection', function (socket) {
-  socket.emit("first matrix", matrix);
-
-  socket.emit("exanak", weather);
-
-  setInterval(function () {
-
-    takter++;
-    console.log(takter);
-
-    for (var y = 0; y < matrix.length; y++) {
-      for (var x = 0; x < matrix[y].length; x++) {
-
-
-        /* 
-
-       if (matrix[y][x].index == 1) {
-          matrix[y][x].mul(matrix);
-        }
-        else if (matrix[y][x].index == 2) {
-          matrix[y][x].eat(matrix);
-        }
-        else if (matrix[y][x].index == 3) {
-          matrix[y][x].eat(matrix);
-        }
-        else if (matrix[y][x].index == 4) {
-          matrix[y][x].eat(matrix);
-        }
-        else if (matrix[y][x].index == 5) {
-          matrix[y][x].eat(matrix);
-        }*/
-      }
-
-      if (takter % 200 == 0) {
-        weather = "summer";
-
-        andzrevStexcel(x, y);
-
-        if (matrix[y][x].index == 4)
-          matrix[y][x] = 0;
-      }
-      else if (takter % 200 == 100) {
-        weather = "winter";
-
-        dzyunStexcel(x, y);
-
-        if (matrix[y][x].index == 5)
-          matrix[y][x] = 0;
-      }
-    }
-
-    socket.emit("redraw matrix", matrix);
-    console.log("emit");
-  }, time);
-});
-
 var frameRate = 1;
 var time = 1000 / frameRate;
 
-function andzrevStexcel(x, y) {
-  var dzg = 10;
 
+function andzrevStexcel(x, y,index) {
+  var dzg = 10;
   while (dzg > 0) {
+
     var x1 = Math.floor(Math.random() * x);
     var y1 = Math.floor(Math.random() * y);
 
@@ -106,3 +62,57 @@ function dzyunStexcel(x, y) {
     }
   }
 }
+
+io.on('connection', function (socket) {
+  socket.emit("first matrix", matrix);
+
+  socket.emit("exanak", weather);
+
+  setInterval(function () {
+
+    takter++;
+    console.log(takter);
+
+    for (var y = 0; y < matrix.length; y++) {
+      for (var x = 0; x < matrix[y].length; x++) {
+
+        if (matrix[y][x].index == 1) {
+          matrix[y][x].mul(matrix);
+        }
+        else if (matrix[y][x].index == 2) {
+          matrix[y][x].eat(matrix);
+        }
+        else if (matrix[y][x].index == 3) {
+          matrix[y][x].eat(matrix);
+        }
+        else if (matrix[y][x].index == 4) {
+          matrix[y][x].eat(matrix);
+        }
+        else if (matrix[y][x].index == 5) {
+          matrix[y][x].eat(matrix);
+        }
+      }
+
+      if (takter % 200 == 0) {
+        weather = "summer";
+        andzrevStexcel(x, y,index);
+        console.log(index);
+
+        if (matrix[y][x].index == 4)
+          matrix[y][x] = 0;
+      }
+      else if (takter % 200 == 100) {
+        weather = "winter";
+
+        dzyunStexcel(x, y);
+
+        if (matrix[y][x].index == 5)
+          matrix[y][x] = 0;
+      }
+    }
+
+    socket.emit("redraw matrix", matrix);
+    console.log("emit");
+  }, time);
+});
+
