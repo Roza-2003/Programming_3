@@ -2,7 +2,11 @@ var side = 20;
 //var weather;
 //var matrix = [];
 var socket = io();
+var wetherclient = "Summer";
 
+socket.on("exanak", function (w) {
+  wetherclient = w;
+});
 
 function setup() {
   createCanvas(20 * side, 20 * side);
@@ -30,31 +34,69 @@ function setup() {
 }
 // noLoop();
 // }
+function drawWeather(w) {
+  var p = document.getElementById("seasons");
+  var weather = w;
+  console.log(weather);
+  if (weather == "Summer") {
+    p.innerText = "Summer";
+  }
+  else if (weather == "Winter") {
+    p.innerText = "Winter";
+  }
+  else if (weather == "Autumn") {
+    p.innerText = "Autumn";
+  }
+  else if (weather == "Spring") {
+    p.innerText = "Spring";
+  }
+}
 function drawMatrix(matrix) {
-  background('grey');
+  background('#33FFFF');
   console.log(matrix);
   for (var y = 0; y < matrix.length; y++) {
     for (var x = 0; x < matrix[y].length; x++) {
 
       if (matrix[y][x] == 0) {
-        fill("grey");
+        fill("#6cb1e2");
+        rect(x * side, y * side, side, side);
       }
-      if (matrix[y][x] == 1) {
-        fill("green");
+      else if (matrix[y][x] == 1) {
+        if (wetherclient == "Summer") {
+          fill("#6bb555");
+        }
+        else if (wetherclient != "Summer") {
+          fill("#f9f77c");
+        }
+        rect(x * side, y * side, side, side);
       }
+
       else if (matrix[y][x] == 2) {
-        fill("yellow");
+        if (wetherclient == "Winter") {
+          fill("#696968");
+        }
+        else if (wetherclient != "Winter") {
+          fill("Yellow");
+        }
+        rect(x * side, y * side, side, side);
       }
       else if (matrix[y][x] == 3) {
         fill("red");
+        rect(x * side, y * side, side, side);
       }
-      rect(x * side, y * side, side, side);
     }
   }
 }
 socket.on("matrix", drawMatrix);
+socket.on("exanak", drawWeather);
 
-
+function mousePressed(){
+  var x = Math.floor(mauseX / side);
+  var y = Math.floor(mauseY / side);
+  arr = [x,y];
+  console.log(arr);
+  socket.emit("Sxmvec",arr)
+}
 // var dzyunKa = false;
 
 // function draw() {
