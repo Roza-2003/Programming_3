@@ -1,21 +1,13 @@
 var LivingCreature = require("./class.LivingCreature");
 module.exports = class Grass extends LivingCreature {
-    mul(matrix) {
+    mul() {
         this.multiply++;
-        var datarkVandakner = this.chooseCell(0,matrix);
-        var norVandak = randomInRange(datarkVandakner);
-
-        if (norVandak && this.multiply >= 8) {
-            var norX = norVandak[0];
-            var norY = norVandak[1];
-
-            matrix[norY][norX] = new Grass(norX, norY, this.index);
+        var newCell = Random(this.chooseCell(0));
+        if (this.multiply >= 6 && newCell) {
+            var newGrass = new Grass(newCell[0], newCell[1], this.index);
+            grassArr.push(newGrass);
+            matrix[newCell[1]][newCell[0]] = 1;
             this.multiply = 0;
         }
     }
-}
-
-function randomInRange(arr){
-    return arr[Math.floor(Math.random() * arr.length)];
-
 }
