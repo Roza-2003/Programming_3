@@ -164,46 +164,52 @@ function draw_wheater() {
 }
 io.on('connection', function (socket) {
   socket.on("Sxmvec", function (arr) {
-    var x = arr[0];
-    var y = arr[1];
+    // var x = arr[0];
+    // var y = arr[1];
 
-    var directions = [
-      [x-1, y-1],
-      [x, y-1],
-      [x+1, y-1],
-      [x-1, y],
-      [x+1, y],
-      [x-1, y+1],
-      [x, y+1],
-      [x+1, y+1]
-    ];
+    // var directions = [
+    //   [x-1, y-1],
+    //   [x, y-1],
+    //   [x+1, y-1],
+    //   [x-1, y],
+    //   [x+1, y],
+    //   [x-1, y+1],
+    //   [x, y+1],
+    //   [x+1, y+1]
+    // ];
 
-    if (matrix[y][x] == 1){
-      for (var i in grassArr){
-        if(y == grassArr[i].y && x == grassArr[i].x){
-          grassArr.splice(i,1);
-          break;
-        }
-      }
-    }
-    else if (matrix[y][x] == 2){
-      for (var i in grasseaterArr){
-        if(y == grasseaterArr[i].y && x == grasseaterArr[i].x){
-          grasseaterArr.splice(i,1);
-          break;
-        }
-      }
-    }
-    else if (matrix[y][x] == 3){
-      for (var i in predatorArr){
-        if(y == predatorArr[i].y && x == predatorArr[i].x){
-          predatorArr.splice(i,1);
-          break;
-        }
-      }
-    }
-
+    // if (matrix[y][x] == 1){
+    //   for (var i in grassArr){
+    //     if(y == grassArr[i].y && x == grassArr[i].x){
+    //       grassArr.splice(i,1);
+    //       break;
+    //     }
+    //   }
+    // }
+    // else if (matrix[y][x] == 2){
+    //   for (var i in grasseaterArr){
+    //     if(y == grasseaterArr[i].y && x == grasseaterArr[i].x){
+    //       grasseaterArr.splice(i,1);
+    //       break;
+    //     }
+    //   }
+    // }
+    // else if (matrix[y][x] == 3){
+    //   for (var i in predatorArr){
+    //     if(y == predatorArr[i].y && x == predatorArr[i].x){
+    //       predatorArr.splice(i,1);
+    //       break;
+    //     }
+    //   }
+    // }
+    // else if (key.keyup == "up"){
+    //   GrassEater.up()
+    // }
+    // else if (key.keydown == "down"){
+    //   GrassEater.down()
+    // }
+    // console.log(key);
   });
 });
-setInterval(drawserever, 2000);
-setInterval(draw_wheater, 6000);
+setInterval(drawserever, 1000);
+setInterval(draw_wheater, 5000);

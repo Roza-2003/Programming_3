@@ -53,7 +53,7 @@ function drawWeather(w) {
 }
 function drawMatrix(matrix) {
   background('#33FFFF');
-  console.log(matrix);
+ // console.log(matrix);
   for (var y = 0; y < matrix.length; y++) {
     for (var x = 0; x < matrix[y].length; x++) {
 
@@ -90,13 +90,14 @@ function drawMatrix(matrix) {
 socket.on("matrix", drawMatrix);
 socket.on("exanak", drawWeather);
 
-function mousePressed(){
-  var x = Math.floor(mauseX / side);
-  var y = Math.floor(mauseY / side);
-  arr = [x,y];
-  console.log(arr);
-  socket.emit("Sxmvec",arr)
-}
+// function mousePressed(){
+//   //console.log(mouseX,mouseY);
+//   var x = Math.floor(mouseX / side);
+//   var y = Math.floor(mouseY / side);
+//   arr = [x,y];
+//  // console.log(arr);
+//   socket.emit("Sxmvec",arr)
+// }
 // var dzyunKa = false;
 
 // function draw() {
