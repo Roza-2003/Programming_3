@@ -67,6 +67,7 @@ for (var y = 0; y < matrix.length; y++) {
 
     if (matrix[y][x] == 1) {
       grassArr.push(new Grass(x, y, 1));
+      // grass=0 xotClec++
     }
     else if (matrix[y][x] == 2) {
       grasseaterArr.push(new GrassEater(x, y, 2));
@@ -164,52 +165,78 @@ function draw_wheater() {
 }
 io.on('connection', function (socket) {
   socket.on("Sxmvec", function (arr) {
-    // var x = arr[0];
-    // var y = arr[1];
+    var x = arr[0];
+    var y = arr[1];
 
-    // var directions = [
-    //   [x-1, y-1],
-    //   [x, y-1],
-    //   [x+1, y-1],
-    //   [x-1, y],
-    //   [x+1, y],
-    //   [x-1, y+1],
-    //   [x, y+1],
-    //   [x+1, y+1]
-    // ];
+    if (matrix[y][x] == 1) {
+      for (var i in grassArr) {
+        if (y == grassArr[i].y && x == grassArr[i].x) {
+          grassArr.splice(i, 1);
+          break;
+        }
+      }
+    }
+    else if (matrix[y][x] == 2) {
+      for (var i in grasseaterArr) {
+        if (y == grasseaterArr[i].y && x == grasseaterArr[i].x) {
+          grasseaterArr.splice(i, 1);
+          break;
+        }
+      }
+    }
+    else if (matrix[y][x] == 3) {
+      for (var i in predatorArr) {
+        if (y == predatorArr[i].y && x == predatorArr[i].x) {
+          predatorArr.splice(i, 1);
+          break;
+        }
+      }
+    }
+    matrix[y][x] = 0;
 
-    // if (matrix[y][x] == 1){
-    //   for (var i in grassArr){
-    //     if(y == grassArr[i].y && x == grassArr[i].x){
-    //       grassArr.splice(i,1);
-    //       break;
-    //     }
-    //   }
-    // }
-    // else if (matrix[y][x] == 2){
-    //   for (var i in grasseaterArr){
-    //     if(y == grasseaterArr[i].y && x == grasseaterArr[i].x){
-    //       grasseaterArr.splice(i,1);
-    //       break;
-    //     }
-    //   }
-    // }
-    // else if (matrix[y][x] == 3){
-    //   for (var i in predatorArr){
-    //     if(y == predatorArr[i].y && x == predatorArr[i].x){
-    //       predatorArr.splice(i,1);
-    //       break;
-    //     }
-    //   }
-    // }
-    // else if (key.keyup == "up"){
-    //   GrassEater.up()
-    // }
-    // else if (key.keydown == "down"){
-    //   GrassEater.down()
-    // }
-    // console.log(key);
+    var kordinatner = [
+      [x - 1, y - 1],
+      [x, y - 1],
+      [x + 1, y - 1],
+      [x - 1, y],
+      [x + 1, y],
+      [x - 1, y + 1],
+      [x, y + 1],
+      [x + 1, y + 1]
+    ];
+    for (var i in kordinatner) {
+      var kordX = kordinatner[i][0];
+      var kordY = kordinatner[i][1];
+      if (kordX >= 0 && kordX < matrix[0].length && kordY >= 1 && kordY < matrix[1].length) {
+        if (matrix[kordY][kordX] == 1) {
+          for (var i in grassArr) {
+            if (kordY == grassArr[i].kordY && kordX == grassArr[i].kordX) {
+              grassArr.splice(i, 1);
+              break;
+            }
+          }
+        }
+        else if (matrix[kordY][kordX] == 2) {
+          for (var i in grasseaterArr) {
+            if (kordY == grasseaterArr[i].kordY && kordX == grasseaterArr[i].kordX) {
+              grasseaterArr.splice(i, 1);
+              break;
+            }
+          }
+        }
+        else if (matrix[kordY][kordX] == 3) {
+          for (var i in predatorArr) {
+            if (kordY == predatorArr[i].kordY && kordX == predatorArr[i].kordX) {
+              predatorArr.splice(i, 1);
+              break;
+            }
+          }
+        }
+      }
+    }
+    matrix[kordY][kordX] = 0;
   });
+  io.sockets.emit("matrix", matrix);
 });
 setInterval(drawserever, 1000);
-setInterval(draw_wheater, 5000);
+setInterval(draw_wheater, 3000);

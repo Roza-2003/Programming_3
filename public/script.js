@@ -90,14 +90,14 @@ function drawMatrix(matrix) {
 socket.on("matrix", drawMatrix);
 socket.on("exanak", drawWeather);
 
-// function mousePressed(){
-//   //console.log(mouseX,mouseY);
-//   var x = Math.floor(mouseX / side);
-//   var y = Math.floor(mouseY / side);
-//   arr = [x,y];
-//  // console.log(arr);
-//   socket.emit("Sxmvec",arr)
-// }
+function mousePressed(){
+  var x = Math.floor(mouseX / side);
+  var y = Math.floor(mouseY / side);
+  arr = [x,y];
+ // console.log(arr);
+  socket.emit("Sxmvec",arr)
+}
+
 // var dzyunKa = false;
 
 // function draw() {
