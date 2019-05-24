@@ -24,9 +24,6 @@ xotakerCnvec = 0;
 gishatichCnvec = 0;
 xotakerMahacav = 0;
 predatorMahacav = 0;
-// xotakermahacav = 0;
-// gishatichmahacav = 0;
-
 // ancrevEkav = 0;
 // cyunEkav = 0;
 
@@ -45,7 +42,7 @@ predatorArr = [];
 // ancrevArr = [];
 
 var w = 50;
-var h = 60;
+var h = 50;
 
 function genMatrix(w, h) {
   var matrix = [];
@@ -213,28 +210,30 @@ io.on('connection', function (socket) {
     }
     matrix[kordY][kordX] = 0;
   });
-
-
 })
 io.on('connection', function (socket) {
-  socket.on("armagedon", function () {
-    for (var y = 0; y < matrix.length; y++) {
-      for (var x = 0; x < matrix[y].length; x++) {
-        matrix[y][x] = 6;
+  socket.on("kes", function () {
+
+    for (var y = 0; y < w; y++) {
+      for (var x = 0; x < h; x++) {
+        if (x + y >= (x * y) / 2) {
+          matrix[y][x] = 6;
+        }
       }
     }
-    grassArr.length = 0;
-    grasseaterArr.length = 0;
-    predatorArr.length = 0;
+    // grassArr.length = 0;
+    // grasseaterArr.length = 0;
+    // predatorArr.length = 0;
 
     io.sockets.emit("matrix", matrix);
   });
 })
+
 var obj = { "info": [] };
 
 function main() {
   var file = "Statistics.json";
-  obj.info.push({ "cnvac xoteri qanak": xotClec, "cnvec xotaker": xotakerCnvec, "cnvec gishatich": gishatichCnvec,"xotakermahacav":xotakerMahacav,"gishatichmahacav":predatorMahacav });
+  obj.info.push({ "cnvac xoteri qanak": xotClec, "cnvec xotaker": xotakerCnvec, "cnvec gishatich": gishatichCnvec, "xotakermahacav": xotakerMahacav, "gishatichmahacav": predatorMahacav });
   fs.writeFileSync(file, JSON.stringify(obj, null, 3));
 }
 setInterval(drawserever, 1000);

@@ -12,9 +12,9 @@ socket.on("exanak", function (w) {
 //   console.log("background");
 // });
 function setup() {
-    createCanvas(20 * side, 20 * side);
-   background("#acacac");
-  }
+  createCanvas(20 * side, 20 * side);
+  background("#acacac");
+}
 
 function drawWeather(w) {
   var p = document.getElementById("seasons");
@@ -67,8 +67,8 @@ function drawMatrix(matrix) {
         rect(x * side, y * side, side, side);
       }
       else if (matrix[y][x] == 6) {
-        fill("red");
-        rect(x * side, y * side, side, side);
+          fill("red");
+          rect(x * side, y * side, side, side);
       }
     }
   }
@@ -77,15 +77,18 @@ function drawMatrix(matrix) {
 socket.on("matrix", drawMatrix);
 socket.on("exanak", drawWeather);
 
-
 function mousePressed() {
   var x = Math.floor(mouseX / side);
   var y = Math.floor(mouseY / side);
   arr = [x, y];
   // console.log(arr);
-  socket.emit("Sxmvec", arr)
+  socket.emit("Sxmvec", arr);
+
 }
 
-function FireButton() {
-  socket.emit("armagedon");
+// function FireButton() {
+//   socket.emit("armagedon");
+// }
+function HalfButton() {
+  socket.emit("kes");
 }
