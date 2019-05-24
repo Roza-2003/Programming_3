@@ -16,11 +16,16 @@ server.listen(3000, function () {
 });
 
 
-Weather = "Summer";
-Weatherinit = 1;
+ Weather = "Summer";
+ Weatherinit = 1;
+ //statistika
 xotClec = 0;
 xotakerCnvec = 0;
 gishatichCnvec = 0;
+
+// xotakermahacav = 0;
+// gishatichmahacav = 0;
+
 // ancrevEkav = 0;
 // cyunEkav = 0;
 
@@ -101,38 +106,54 @@ function drawserever() {
 }
 function draw_wheater() {
   Weatherinit++;
-  if (Weatherinit == 5) {
-    Weather = 1;
-  }
-  if (Weatherinit == 4) {
-    Weather = "Autumn";
-  }
-  if (Weatherinit == 3) {
-    Weather = "Winter";
-  }
-  if (Weatherinit == 2) {
-    Weather = "Spring";
-  }
   if (Weatherinit == 1) {
     Weather = "Summer";
   }
+  else if (Weatherinit == 2) {
+    Weather = "Spring";
+  }
+  else if (Weatherinit == 3) {
+    Weather = "Winter";
+  }
+  else if (Weatherinit == 4) {
+    Weather = "Autumn";
+  }
+  else if (Weatherinit == 5) {
+    Weather == 1;
+  }
   io.sockets.emit("exanak", Weather);
 }
+// function drawWeatherBack() {
+//   if (Weather == "Summer") {
+//     background('#FAFDAD');
+//   }
+//   else if (Weather == "Autumn") {
+//     background(yellow);
+//   }
+//   else if (Weather == "Winter") {
+//     background('#33FFFF');
+//   }
+//   else if (Weather == "Spring") {
+//     background("#e0b5b5");
+//   }
+//   io.sockets.emit("exanakBACK", background);
+// }
 io.on('connection', function (socket) {
   socket.on("Sxmvec", function (arr) {
     var x = arr[0];
     var y = arr[1];
 
     var kordinatner = [
-      [x - 1, y - 1],
-      [x, y - 1],
-      [x + 1, y - 1],
-      [x - 1, y],
-      [x + 1, y],
-      [x - 1, y + 1],
+      [x + 1, y + 1],
       [x, y + 1],
-      [x + 1, y + 1]
+      [x - 1, y + 1],
+      [x + 1, y],
+      [x - 1, y],
+      [x + 1, y - 1],
+      [x, y - 1],
+      [x - 1, y - 1]
     ];
+    
     if (matrix[x][y] == 1) {
       for (var i in grassArr) {
         if (y == grassArr[i].y && x == grassArr[i].x) {
@@ -191,10 +212,10 @@ io.on('connection', function (socket) {
     }
     matrix[kordY][kordX] = 0;
   });
-  socket.on("armagedon", function(){
-    for(var y = 0; y<matrix.length; y++){
-      for(var x = 0; x<matrix[y].length; x++){
-        matrix[y][x]=6;
+  socket.on("armagedon", function () {
+    for (var y = 0; y < matrix.length; y++) {
+      for (var x = 0; x < matrix[y].length; x++) {
+        matrix[y][x] = 6;
       }
     }
     grassArr.length = 0;
@@ -213,6 +234,13 @@ function main() {
   obj.info.push({ "cnvac xoteri qanak": xotClec, "cnvec xotaker": xotakerCnvec, "cnvec gishatich": gishatichCnvec });
   fs.writeFileSync(file, JSON.stringify(obj, null, 3));
 }
+// function main() {
+//   var file = "Statistics.json";
+//   obj.info.push({  "mahacav xotaker": xotakermahacav, "mahacav gishatich": gishatichmahacav });
+//   fs.writeFileSync(file, JSON.stringify(obj, null, 3));
+// }
 setInterval(drawserever, 1000);
-setInterval(draw_wheater, 5000);
+setInterval(draw_wheater, 6000);
+//setInterval(drawWeatherBack, 6000);
 setInterval(main, 2000);
+

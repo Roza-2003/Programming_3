@@ -7,11 +7,14 @@ var wetherclient = "Summer";
 socket.on("exanak", function (w) {
   wetherclient = w;
 });
-
+// socket.on("exanakBACK",function setup() {
+//   createCanvas(20 * side, 20 * side);
+//   console.log("background");
+// });
 function setup() {
-  createCanvas(20 * side, 20 * side);
-  background('#FAFDAD');
-}
+    createCanvas(20 * side, 20 * side);
+   background("#acacac");
+  }
 
 function drawWeather(w) {
   var p = document.getElementById("seasons");
@@ -20,18 +23,18 @@ function drawWeather(w) {
   if (weather == "Summer") {
     p.innerText = "Summer";
   }
-  else if (weather == "Winter") {
-    p.innerText = "Winter";
-  }
   else if (weather == "Autumn") {
     p.innerText = "Autumn";
+  }
+  else if (weather == "Winter") {
+    p.innerText = "Winter";
   }
   else if (weather == "Spring") {
     p.innerText = "Spring";
   }
 }
 function drawMatrix(matrix) {
-  background('#33FFFF');
+  // background('#33FFFF');
   // console.log(matrix);
   for (var y = 0; y < matrix.length; y++) {
     for (var x = 0; x < matrix[y].length; x++) {
@@ -63,13 +66,10 @@ function drawMatrix(matrix) {
         fill("red");
         rect(x * side, y * side, side, side);
       }
-      else if (matrix[y][x] == 4) {
-        fill("blue");
-        rect(x * side, y * side, side, side);
-      }
     }
   }
 }
+
 socket.on("matrix", drawMatrix);
 socket.on("exanak", drawWeather);
 
@@ -80,6 +80,7 @@ function mousePressed() {
   // console.log(arr);
   socket.emit("Sxmvec", arr)
 }
+
 function FireButton() {
   socket.emit("armagedon");
 }
