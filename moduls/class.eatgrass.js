@@ -74,7 +74,8 @@ module.exports = class GrassEater extends LivingCreature {
                     grasseaterArr.splice(i, 1);
                 }
             }
-        }
+		}
+		xotakerMahacav++;
     }
 }
 

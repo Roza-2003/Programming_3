@@ -16,13 +16,14 @@ server.listen(3000, function () {
 });
 
 
- Weather = "Summer";
- Weatherinit = 1;
- //statistika
+Weather = "Summer";
+Weatherinit = 1;
+//statistika
 xotClec = 0;
 xotakerCnvec = 0;
 gishatichCnvec = 0;
-
+xotakerMahacav = 0;
+predatorMahacav = 0;
 // xotakermahacav = 0;
 // gishatichmahacav = 0;
 
@@ -143,18 +144,18 @@ io.on('connection', function (socket) {
     var x = arr[0];
     var y = arr[1];
 
-    var kordinatner = [
-      [x + 1, y + 1],
-      [x, y + 1],
-      [x - 1, y + 1],
-      [x + 1, y],
-      [x - 1, y],
-      [x + 1, y - 1],
+    kordinatner = [
+      [x - 1, y - 1],
       [x, y - 1],
-      [x - 1, y - 1]
+      [x + 1, y - 1],
+      [x - 1, y],
+      [x + 1, y],
+      [x - 1, y + 1],
+      [x, y + 1],
+      [x + 1, y + 1]
     ];
-    
-    if (matrix[x][y] == 1) {
+
+    if (matrix[y][x] == 1) {
       for (var i in grassArr) {
         if (y == grassArr[i].y && x == grassArr[i].x) {
           grassArr.splice(i, 1);
@@ -162,7 +163,7 @@ io.on('connection', function (socket) {
         }
       }
     }
-    else if (matrix[x][y] == 2) {
+    else if (matrix[y][x] == 2) {
       for (var i in grasseaterArr) {
         if (y == grasseaterArr[i].y && x == grasseaterArr[i].x) {
           grasseaterArr.splice(i, 1);
@@ -170,7 +171,7 @@ io.on('connection', function (socket) {
         }
       }
     }
-    else if (matrix[x][y] == 3) {
+    else if (matrix[y][x] == 3) {
       for (var i in predatorArr) {
         if (y == predatorArr[i].y && x == predatorArr[i].x) {
           predatorArr.splice(i, 1);
@@ -212,6 +213,10 @@ io.on('connection', function (socket) {
     }
     matrix[kordY][kordX] = 0;
   });
+
+
+})
+io.on('connection', function (socket) {
   socket.on("armagedon", function () {
     for (var y = 0; y < matrix.length; y++) {
       for (var x = 0; x < matrix[y].length; x++) {
@@ -223,22 +228,15 @@ io.on('connection', function (socket) {
     predatorArr.length = 0;
 
     io.sockets.emit("matrix", matrix);
-  })
-});
-
-
+  });
+})
 var obj = { "info": [] };
 
 function main() {
   var file = "Statistics.json";
-  obj.info.push({ "cnvac xoteri qanak": xotClec, "cnvec xotaker": xotakerCnvec, "cnvec gishatich": gishatichCnvec });
+  obj.info.push({ "cnvac xoteri qanak": xotClec, "cnvec xotaker": xotakerCnvec, "cnvec gishatich": gishatichCnvec,"xotakermahacav":xotakerMahacav,"gishatichmahacav":predatorMahacav });
   fs.writeFileSync(file, JSON.stringify(obj, null, 3));
 }
-// function main() {
-//   var file = "Statistics.json";
-//   obj.info.push({  "mahacav xotaker": xotakermahacav, "mahacav gishatich": gishatichmahacav });
-//   fs.writeFileSync(file, JSON.stringify(obj, null, 3));
-// }
 setInterval(drawserever, 1000);
 setInterval(draw_wheater, 6000);
 //setInterval(drawWeatherBack, 6000);

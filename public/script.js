@@ -66,12 +66,17 @@ function drawMatrix(matrix) {
         fill("red");
         rect(x * side, y * side, side, side);
       }
+      else if (matrix[y][x] == 6) {
+        fill("red");
+        rect(x * side, y * side, side, side);
+      }
     }
   }
 }
 
 socket.on("matrix", drawMatrix);
 socket.on("exanak", drawWeather);
+
 
 function mousePressed() {
   var x = Math.floor(mouseX / side);

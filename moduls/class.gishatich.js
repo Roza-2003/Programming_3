@@ -76,6 +76,7 @@ module.exports = class Predator extends LivingCreature {
 				}
 			}
 		}
+		predatorMahacav++;
 	}
 
 	// die(matrix) {
