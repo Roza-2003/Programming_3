@@ -1,6 +1,5 @@
 var side = 20;
-//var weather;
-//var matrix = [];
+
 var socket = io();
 var wetherclient = "Summer";
 
@@ -19,7 +18,7 @@ function setup() {
 function drawWeather(w) {
   var p = document.getElementById("seasons");
   var weather = w;
-  //console.log(weather);
+
   if (weather == "Summer") {
     p.innerText = "Summer";
   }
@@ -34,8 +33,6 @@ function drawWeather(w) {
   }
 }
 function drawMatrix(matrix) {
-  // background('#33FFFF');
-  // console.log(matrix);
   for (var y = 0; y < matrix.length; y++) {
     for (var x = 0; x < matrix[y].length; x++) {
 
@@ -52,23 +49,33 @@ function drawMatrix(matrix) {
         }
         rect(x * side, y * side, side, side);
       }
-
       else if (matrix[y][x] == 2) {
+        fill("yellow");
+      }
+      else if (matrix[y][x] == 3) {
         if (wetherclient == "Winter") {
           fill("#b1e2e0");
         }
         else if (wetherclient != "Winter") {
-          fill("Yellow");
+          fill("purple");
         }
         rect(x * side, y * side, side, side);
       }
-      else if (matrix[y][x] == 3) {
+      else if (matrix[y][x] == 4) {
+        fill("red");
+        rect(x * side, y * side, side, side);
+      }
+      else if (matrix[y][x] == 5) {
         fill("red");
         rect(x * side, y * side, side, side);
       }
       else if (matrix[y][x] == 6) {
-          fill("red");
-          rect(x * side, y * side, side, side);
+        fill("blue");
+        rect(x * side, y * side, side, side);
+      }
+      else if (matrix[y][x] == 7) {
+        fill("wite");
+        rect(x * side, y * side, side, side);
       }
     }
   }
@@ -81,14 +88,14 @@ function mousePressed() {
   var x = Math.floor(mouseX / side);
   var y = Math.floor(mouseY / side);
   arr = [x, y];
-  // console.log(arr);
   socket.emit("Sxmvec", arr);
-
 }
-
-// function FireButton() {
-//   socket.emit("armagedon");
-// }
-function HalfButton() {
+function HalfButtonRight() {
   socket.emit("kes");
+}
+function HalfButtonLeft() {
+  socket.emit("kesdzax");
+}
+function Corner() {
+  socket.emit("ankyun");
 }
