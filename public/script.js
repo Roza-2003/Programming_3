@@ -33,21 +33,25 @@ function drawWeather(w) {
   }
 }
 function drawMatrix(matrix) {
+  background("grey");
   for (var y = 0; y < matrix.length; y++) {
     for (var x = 0; x < matrix[y].length; x++) {
-
       if (matrix[y][x] == 0) {
-        fill("#acacac");
-        rect(x * side, y * side, side, side);
+        if (wetherclient == "Summer") {
+          fill("#FAFDAD")
+        }    
+        else if (wetherclient == "Winter")  {
+          fill("#acacac")
+        }  
+
       }
       else if (matrix[y][x] == 1) {
         if (wetherclient == "Summer") {
           fill("green");
         }
         else if (wetherclient != "Summer") {
-          fill("#e25802");
+          fill("#feb07f");
         }
-        rect(x * side, y * side, side, side);
       }
       else if (matrix[y][x] == 2) {
         fill("yellow");
@@ -57,7 +61,7 @@ function drawMatrix(matrix) {
           fill("#b1e2e0");
         }
         else if (wetherclient != "Winter") {
-          fill("purple");
+          fill("red");
         }
         rect(x * side, y * side, side, side);
       }
@@ -71,12 +75,11 @@ function drawMatrix(matrix) {
       }
       else if (matrix[y][x] == 6) {
         fill("blue");
-        rect(x * side, y * side, side, side);
       }
       else if (matrix[y][x] == 7) {
         fill("wite");
-        rect(x * side, y * side, side, side);
       }
+      rect(x * side, y * side, side, side);
     }
   }
 }

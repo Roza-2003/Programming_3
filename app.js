@@ -212,6 +212,9 @@ io.on('connection', function (socket) {
         }
       }
     }
+    grassArr.length = 0;
+    grasseaterArr.length = 0;
+    predatorArr.length = 0;
     io.sockets.emit("matrix", matrix);
   });
 })
@@ -219,11 +222,14 @@ io.on('connection', function (socket) {
   socket.on("ankyun", function () {
     for (var y = 0; y < w; y++) {
       for (var x = 0; x < h; x++) {
-        if (x == y) {
+        if (y == x) {
           matrix[y][x] = 7;
         }
       }
     }
+    grassArr.length = 0;
+    grasseaterArr.length = 0;
+    predatorArr.length = 0;
     io.sockets.emit("matrix", matrix);
   });
 })
