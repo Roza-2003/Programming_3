@@ -33,8 +33,8 @@ module.exports =  class ancrev extends LivingCreature {
 		}
 		return found;
 	}
-	eat(matrix) {
-		var new_x = randomInRange(this.chooseCell(1,matrix));
+	eat() {
+		var new_x = Random(this.chooseCell(1));
 		if (new_x) {
 			var x = new_x[0];
 			var y = new_x[1];
@@ -44,25 +44,26 @@ module.exports =  class ancrev extends LivingCreature {
 
 			this.x = x;
 			this.y = y;
-			for (var i in xotArr) {
-				if (xotArr[i].x == x && xotArr[i].y == y) {
-					xotArr.splice(i, 1);
+			for (var i in grassArr) {
+				if (grassArr[i].x == x && grassArr[i].y == y) {
+					grassArr.splice(i, 1);
 				}
 			}
-			for (var i in xotakerArr) {
-				if (xotakerArr[i].x == x && xotakerArr[i].y == y) {
-					xotakerArr.splice(i, 1);
+			for (var i in grasseaterArr) {
+				if (grasseaterArr[i].x == x && grasseaterArr[i].y == y) {
+					grasseaterArr.splice(i, 1);
 				}
 			}
-			for (var i in gishatichArr) {
-				if (gishatichArr[i].x == x && gishatichArr[i].y == y) {
-					gishatichArr.splice(i, 1);
+			for (var i in predatorArr) {
+				if (predatorArr[i].x == x && predatorArr[i].y == y) {
+					predatorArr.splice(i, 1);
 				}
 			}
 		}
+		//ancrevekav++;
 	}
-	die(matrix) {
-		if (weather = "summer") {
+	die() {
+		if (Weather = "Winter") {
 			matrix[this.y][this.x] = 0;
 			for (var i in snowArr) {
 				if (this.x == snowArr[i].x && this.y == snowArr[i].y) {
@@ -72,8 +73,4 @@ module.exports =  class ancrev extends LivingCreature {
 			}
 		}
 	}
-}
-function randomInRange(arr){
-    return arr[Math.floor(Math.random() * arr.length)];
-
 }

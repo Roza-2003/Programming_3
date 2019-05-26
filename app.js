@@ -24,14 +24,20 @@ xotakerCnvec = 0;
 gishatichCnvec = 0;
 xotakerMahacav = 0;
 predatorMahacav = 0;
+//ancrevekav = 0;
+
 
 var Grass = require("./moduls/class.grass.js");
 var GrassEater = require("./moduls/class.eatgrass.js");
 var Predator = require("./moduls/class.gishatich.js");
+var Ancrev = require("./moduls/class.ancrev.js");
+var Snow = require("./moduls/class.snow.js");
 
 grassArr = [];
 grasseaterArr = [];
 predatorArr = [];
+ancrevArr = [];
+snowArr = [];
 
 var w = 50;
 var h = 50;
@@ -41,15 +47,21 @@ function genMatrix(w, h) {
   for (var y = 0; y < h; y++) {
     matrix[y] = [];
     for (var x = 0; x < w; x++) {
-      var r = Math.floor(Math.random() * 60);
+      var r = Math.floor(Math.random() * 80);
       if (r < 20) r = 0;
       else if (r < 45) r = 1;
-      else if (r < 55) r = 2;
-      else if (r < 60) r = 3;
+      else if (r < 65) r = 2;
+      else if (r < 70) r = 3;
+      else if (r < 75) r = 8;
+      else if (r < 80) r = 9;
+
       matrix[y][x] = r;
+      //console.log(matrix[y][x]);
     }
   }
+
   return matrix;
+
 }
 
 Random = function (arr) {
@@ -73,6 +85,16 @@ for (var y = 0; y < matrix.length; y++) {
       predatorArr.push(new Predator(x, y, 3));
       gishatichCnvec++;
     }
+    if (w == "Summer") {
+      if (matrix[y][x] == 8) {
+        ancrevArr.push(new Ancrev(x, y, 8));
+      }
+    }
+    if (w == "Winter") {
+      if (matrix[y][x] == 9) {
+        snowArr.push(new Snow(x, y, 9));
+      }
+    }
   }
 }
 
@@ -92,30 +114,40 @@ function drawserever() {
     predatorArr[i].eat();
     predatorArr[i].die();
   }
+  for (var i in ancrevArr) {
+    ancrevArr[i].eat();
+    ancrevArr[i].die();
+  }
+  for (var i in snowArr) {
+    snowArr[i].eat();
+    snowArr[i].die();
+  }
+
   io.sockets.emit("matrix", matrix);
 }
 function draw_wheater() {
   Weatherinit++;
-  if (Weatherinit == 1) {
-    Weather = "Summer";
+  if (Weatherinit == 5) {
+    Weatherinit = 1;
   }
-  else if (Weatherinit == 2) {
-    Weather = "Spring";
-  }
-  else if (Weatherinit == 3) {
-    Weather = "Winter";
-  }
-  else if (Weatherinit == 4) {
+  if (Weatherinit == 4) {
     Weather = "Autumn";
   }
-  else if (Weatherinit == 5) {
-    Weather == 1;
+  if (Weatherinit == 3) {
+    Weather = "Winter";
+  }
+  if (Weatherinit == 2) {
+    Weather = "Spring";
+  }
+  if (Weatherinit == 1) {
+    Weather = "Summer";
   }
   io.sockets.emit("exanak", Weather);
 }
 
 io.on('connection', function (socket) {
   socket.on("Sxmvec", function (arr) {
+    // if (x != undefined && y != undefined){
     var x = arr[0];
     var y = arr[1];
 
@@ -187,11 +219,11 @@ io.on('connection', function (socket) {
       }
     }
     matrix[kordY][kordX] = 0;
+
   });
 })
 io.on('connection', function (socket) {
-  socket.on("kes", function () {
-
+  socket.on("kesdzax", function () {
     for (var y = 0; y < w; y++) {
       for (var x = 0; x < h; x++) {
         if (x + y >= (x * y) / 2) {
@@ -199,16 +231,20 @@ io.on('connection', function (socket) {
         }
       }
     }
+    grassArr.length = 0;
+    grasseaterArr.length = 0;
+    predatorArr.length = 0;
     io.sockets.emit("matrix", matrix);
   });
 })
 io.on('connection', function (socket) {
-  socket.on("kesdzax", function () {
-
+  socket.on("kesaj", function () {
     for (var y = 0; y < w; y++) {
       for (var x = 0; x < h; x++) {
-        if (x + y <= (x * y) / 6) {
-          matrix[y][x] = 6;
+        if (x != 0 && y != 0) {
+          if (x + y <= (x * y) / 5) {
+            matrix[y][x] = 6;
+          }
         }
       }
     }
@@ -222,7 +258,7 @@ io.on('connection', function (socket) {
   socket.on("ankyun", function () {
     for (var y = 0; y < w; y++) {
       for (var x = 0; x < h; x++) {
-        if (y == x) {
+        if (x == y) {
           matrix[y][x] = 7;
         }
       }
@@ -234,13 +270,11 @@ io.on('connection', function (socket) {
   });
 })
 var obj = { "info": [] };
-
 function main() {
   var file = "Statistics.json";
-  obj.info.push({ "Աճած խոտերի քանակ": xotClec, "Ծնված խոտակերների քանակ": xotakerCnvec, "Ծնված գիշատիչների քանակ": gishatichCnvec, "Մահացած խոտակերների քանակ": xotakerMahacav, "Մահացած գիշատիչների քանակ": predatorMahacav });  
+  obj.info.push({ "Աճած խոտերի քանակ": xotClec, "Ծնված խոտակերների քանակ": xotakerCnvec, "Ծնված գիշատիչների քանակ": gishatichCnvec, "Մահացած խոտակերների քանակ": xotakerMahacav, "Մահացած գիշատիչների քանակ": predatorMahacav });
   fs.writeFileSync(file, JSON.stringify(obj, null, 3));
 }
 setInterval(drawserever, 1000);
 setInterval(draw_wheater, 6000);
 setInterval(main, 2000);
-
