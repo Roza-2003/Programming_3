@@ -19,7 +19,7 @@
   "homepage": "https://tumotestgol.herokuapp.com/",
   "dependencies": {
     "express": "^4.17.0",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.4.0"
   },
   "engines": {
     "node": "4.7.2"
